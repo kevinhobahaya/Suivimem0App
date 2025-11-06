@@ -26,9 +26,9 @@ services:
     environment:
       - DEBUG=False
       - SECRET_KEY=ta_clef_secrete
-      - DB_NAME=localhost
+      - DB_NAME=suivimemo
       - DB_USER=django
-      - DB_PASSWORD='djangopassword'
+      - DB_PASSWORD=djangopassword
       - DB_HOST=db
       - DB_PORT=3306
 
