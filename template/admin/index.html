@@ -1,0 +1,115 @@
+{% extends 'admin/structure.html' %}
+{% block content %}
+{% load static %}
+
+<main id="main" class="main">
+  <div class="pagetitle">
+    <h1>Tableau de bord des memo internes</h1>
+  </div>
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- 1️⃣ Total brut par mois -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Évolution du total brut par mois</h5>
+            <div id="chart_mois" style="height: 350px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2️⃣ Total par importateur -->
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Répartition du total brut par importateur</h5>
+            <div id="chart_importateur" style="height: 350px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3️⃣ Frais par mois -->
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Frais de contrôle, d’analyse et TVA par mois</h5>
+            <div id="chart_frais" style="height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- Librairie ECharts -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // === 1️⃣ TOTAL PAR MOIS ===
+  const mois = {{ mois|safe }};
+  const total_brut = {{ total_brut|safe }};
+  echarts.init(document.getElementById("chart_mois")).setOption({
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', data: mois },
+    yAxis: { type: 'value', name: 'Total Brut' },
+    series: [{
+      data: total_brut,
+      type: 'bar',
+      color: '#4e73df',
+      barWidth: '60%'
+    }],
+    title: { text: 'Total brut par mois', left: 'center' }
+  });
+
+  // === 2️⃣ TOTAL PAR IMPORTATEUR ===
+  const importateurs = {{ importateurs|safe }};
+  const total_importateur = {{ total_importateur|safe }};
+  echarts.init(document.getElementById("chart_importateur")).setOption({
+    tooltip: { trigger: 'item' },
+    legend: { bottom: 0 },
+    series: [{
+      name: 'Total Brut',
+      type: 'pie',
+      radius: '65%',
+      data: importateurs.map((name, i) => ({
+        name,
+        value: total_importateur[i]
+      })),
+      emphasis: {
+        itemStyle: {
+          shadowBlur: 10,
+          shadowOffsetX: 0,
+          shadowColor: 'rgba(0, 0, 0, 0.5)'
+        }
+      }
+    }],
+    title: { text: 'Total par importateur', left: 'center' }
+  });
+
+  // === 3️⃣ FRAIS PAR MOIS ===
+  const mois_frais = {{ mois_frais|safe }};
+  const frais_controle = {{ frais_controle|safe }};
+  const frais_labo = {{ frais_labo|safe }};
+  const tva = {{ tva|safe }};
+  echarts.init(document.getElementById("chart_frais")).setOption({
+    tooltip: { trigger: 'axis' },
+    legend: { data: ['Contrôle', 'Labo', 'TVA'], top: 0 },
+    xAxis: { type: 'category', data: mois_frais },
+    yAxis: { type: 'value', name: 'Montant' },
+    series: [
+      { name: 'Contrôle', type: 'bar', stack: 'total', data: frais_controle },
+      { name: 'Labo', type: 'bar', stack: 'total', data: frais_labo },
+      { name: 'TVA', type: 'bar', stack: 'total', data: tva }
+    ],
+    title: { text: 'Frais par mois', left: 'center' }
+  });
+
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,264 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mémo Interne - OCC</title>
+    <link rel="stylesheet" href="{% static 'css/memo.css' %}">
+    <style>
+        /* Header layout */
+        .header-top {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .header-top h4, .header-top p {
+            margin: 2px 0;
+        }
+
+        .logo {
+            margin: 5px 0;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .date {
+            margin-top: 10px;
+            text-align: right;
+            width: 100%;
+        }
+
+        /* Reference section */
+        .ref {
+            margin-top: 5px;
+        }
+
+        .ref p, .ref .title {
+            margin: 5px 0;
+        }
+
+        .title {
+            font-size: 1.1em;
+        }
+
+        /* Content section */
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .left, .right {
+            width: 48%;
+        }
+
+        .left ul, .right ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .left ul li, .right ul li {
+            margin-bottom: 5px;
+        }
+
+        /* Message section */
+        .message {
+            margin-top: 10px;
+        }
+
+        /* Signatures */
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .signatures .signature {
+            width: 50%;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+        }
+
+        /* Boutons fixes */
+        #printButton, #backButton {
+            position: fixed;
+            top: 20px;
+            padding: 12px 30px;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.2s;
+            z-index: 9999;
+        }
+
+        /* Bouton Imprimer (à droite) */
+        #printButton {
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+        }
+
+        #printButton:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Bouton Retour (à gauche) */
+        #backButton {
+            left: 20px;
+            background-color: #6c757d;
+            color: white;
+        }
+
+        #backButton:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Styles pour impression */
+        @media print {
+            html, body {
+                height: auto;
+                margin: 0;
+                padding: 0;
+            }
+
+            .memo-container {
+                display: block;
+                min-height: auto;
+            }
+
+            footer {
+                display: block !important;
+                text-align: left;
+                margin-top: 20px;
+            }
+
+            /* Masquer les boutons */
+            #printButton, #backButton {
+                display: none;
+            }
+
+            /* Empêcher la coupure d’éléments */
+            section, header, footer {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Boutons -->
+    <button id="backButton" onclick="retourPrecedent()">← Retour</button>
+    <button id="printButton" onclick="imprimerMemo()">Imprimer le Mémo</button>
+
+    <div class="memo-container">
+        <header>
+            <div class="header-top">
+                <h4>REPUBLIQUE DEMOCRATIQUE DU CONGO</h4>
+                <h4>Office Congolais de Contrôle</h4>
+                <div class="logo">
+                    <img src="{% static 'image/logo.png' %}" alt="Logo OCC">
+                </div>
+                <h4>Direction Provinciale du Nord-Kivu</h4>
+                <p>
+                    <strong>AGENCE DE BENI</strong><br>
+                    <em>Détachement de Kasindi</em>
+                </p>
+                <p class="date">Kasindi, le {{ rapport.date|date:"d/m/Y" }}</p>
+            </div>
+        </header>
+
+        <section class="ref">
+            <p><strong>N/Réf :</strong> OCC/KSD/A.BN/{{ rapport.num_ref }}/{{ rapport.mois_ref }}/{{ rapport.date|date:"Y" }}</p>
+            <p class="title"><strong>Memo interne à l’attention des Agences</strong><br>
+            <strong>BENI & BUTEMBO</strong></p>
+        </section>
+
+        <section class="content">
+            <div class="left">
+                <p><strong>CONCERNE :</strong></p>
+                <ul>
+                    <li>Importateur : {{ rapport.importateur }}</li>
+                    <li>Container : {{ rapport.container }}</li>
+                    <li>Marchandises : {{ rapport.marchandise }}</li>
+                    <li>Quantité : {{ rapport.quantite }} COLIS</li>
+                    <li>Poids : {{ rapport.poids }} KGS</li>
+                    <li>FOB : {{ rapport.fob }}</li>
+                    <li>CIF : {{ rapport.cif }}</li>
+                    <li>Num. BL : {{ rapport.num_bl }}</li>
+                    <li>Num. FERI/AD : {{ rapport.num_fbr_aa }}</li>
+                    <li>Plaque : {{ rapport.plaque }}</li>
+                    <li>Num. E : {{ rapport.num_e }}</li>
+                    <li>Origine : {{ rapport.origine }}</li>
+                    <li>Provenance : {{ rapport.provenance }}</li>
+                    <li>Transitaire : {{ rapport.transitaire }}</li>
+                </ul>
+            </div>
+
+            <div class="right">
+                <p><strong>FRAIS PERCUS :</strong></p>
+                <ul>
+                    <li>Frais de Contrôle : {{ rapport.frais_controle }} FC</li>
+                    <li>Frais d’Analyse Labo : {{ rapport.frais_analyse_labo }} FC</li>
+                    <li>TVA : {{ rapport.tva }} FC</li>
+                    <li>Total Brut : {{ rapport.total_brut }} FC</li>
+                    <li>N.D. n° : {{ rapport.nb_no }}</li>
+                    <li>Reçu n° : {{ rapport.recu_no }}</li>
+                    <li>BV n° : {{ rapport.bv_num }}</li>
+                    <li>Liquidation n° : {{ rapport.liquidation_no }}</li>
+                    <li>Nature de la marchandise/Laboratoire : {{ rapport.travail_laboratoire }}</li>
+                    <li>Numero AV : {{ rapport.num_av }}</li>
+                    <li>IM4</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="message">
+            <p>
+                Nous vous demandons d’effectuer le contrôle physique de la marchandise ci-haut identifiée, déclarée à Kasindi et nous faire rapport.
+            </p>
+            <p>
+                En cas de discordance par rapport à la déclaration, veuillez procéder au redressement et au réajustement de la facturation.
+            </p>
+            <p>Veuillez agréer l’expression de notre franche collaboration.</p>
+        </section>
+
+        <section class="signatures">
+            <div class="signature">
+                <p><strong>LE CHEF DE BUREAU EXPLOITATION</strong></p>
+            </div>
+            <div class="signature">
+                <p><strong>LE CHEF DE DETACHEMENT</strong></p>
+            </div>
+        </section>
+
+        <footer>
+            <p>CC : - SCE IMPORT</p>
+        </footer>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script>
+        function imprimerMemo() {
+            window.print();
+        }
+
+        function retourPrecedent() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
