@@ -66,6 +66,11 @@
             margin-bottom: 5px;
         }
 
+        /* ✅ Augmenter la taille de la police des listes */
+        .left ul li, .right ul li {
+            font-size: 16px; /* Ajuste ici selon ton besoin */
+        }
+
         /* Message section */
         .message {
             margin-top: 10px;
@@ -197,8 +202,8 @@
                     <li>Quantité : {{ rapport.quantite }} COLIS</li>
                     <li>Poids : {{ rapport.poids }} KGS</li>
                     <li>FOB : {{ rapport.fob }}</li>
-                    <li>CIF : {{ rapport.cif }}</li>
-                    <li>Num. BL : {{ rapport.num_bl }}</li>
+                    <!-- <li>CIF : {{ rapport.cif }}</li>
+                    <li>Num. BL : {{ rapport.num_bl }}</li> -->
                     <li>Num. FERI/AD : {{ rapport.num_fbr_aa }}</li>
                     <li>Plaque : {{ rapport.plaque }}</li>
                     <li>Num. E : {{ rapport.num_e }}</li>
@@ -216,8 +221,8 @@
                     <li>TVA : {{ rapport.tva }} FC</li>
                     <li>Total Brut : {{ rapport.total_brut }} FC</li>
                     <li>N.D. n° : {{ rapport.nb_no }}</li>
-                    <li>Reçu n° : {{ rapport.recu_no }}</li>
-                    <li>BV n° : {{ rapport.bv_num }}</li>
+                    <!-- <li>Reçu n° : {{ rapport.recu_no }}</li> -->
+                    <!-- <li>BV n° : {{ rapport.bv_num }}</li> -->
                     <li>Liquidation n° : {{ rapport.liquidation_no }}</li>
                     <li>Nature de la marchandise/Laboratoire : {{ rapport.travail_laboratoire }}</li>
                     <li>Numero AV : {{ rapport.num_av }}</li>

@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 from . import views
 # AppMemo/urls.py
-from SuiviMemoProjet import urls  # ❌ ceci crée une boucle circulaire
+from SuiviMemo import urls  # ❌ ceci crée une boucle circulaire
 
 app_name='AppMemo'
 
