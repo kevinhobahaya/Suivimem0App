@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 import uuid
 
   
-class Concerne(models.Model):  
+class Concerne(models.Model): 
+    title = models.CharField(max_length=100, default=1)  
     importateur = models.CharField(max_length=255)  
     container = models.CharField(max_length=100)  
     marchandise = models.CharField(max_length=255)  

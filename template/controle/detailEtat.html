@@ -84,6 +84,13 @@
             <form class="row g-3 needs-validation" novalidate action="{% url 'AppMemo:createpageconcerne' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="col-lg-6">
+                  <label for="yourUsername" class="form-label">Nom de l'agence</label>
+                  <div class="input-group has-validation">
+                    <input type="text" name="title" class="form-control" id="yourUsername" required>
+                    <div class="invalid-feedback">Please enter an agence name.</div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
                   <label for="yourUsername" class="form-label">importateur</label>
                   <div class="input-group has-validation">
                     <input type="text" name="importateur" class="form-control" id="yourUsername" required>
@@ -250,6 +257,13 @@
             <!-- Multi Columns Form -->
             <form class="row g-3 needs-validation"  action="/modifier/{{i.id}}/" method="post">
                 {% csrf_token %}
+                <div class="col-lg-6">
+                  <label for="yourUsername" class="form-label">Nom de l'agence</label>
+                  <div class="input-group has-validation">
+                    <input type="text" name="title"  value="{{i.title}}" class="form-control" id="yourUsername" required>
+                    <div class="invalid-feedback">Please enter an agence name.</div>
+                  </div>
+                </div>
                 <div class="col-lg-6">
                   <label for="yourUsername" class="form-label">importateur</label>
                   <div class="input-group has-validation">

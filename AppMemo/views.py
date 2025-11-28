@@ -212,6 +212,7 @@ def pageDetail(request):
 
 def CreateConcerne(request):
     if request.method == 'POST':
+        title = request.POST.get('title')
         importateur = request.POST.get('importateur')
         container = request.POST.get('container')
         marchandise = request.POST.get('marchandise')
@@ -242,6 +243,7 @@ def CreateConcerne(request):
         # Calcul du total_brut
         total_brut = frais_controle + frais_analyse_labo + tva
         form = Concerne(
+            title = title,
             importateur = importateur,
             container = container,
             marchandise = marchandise,
@@ -276,6 +278,7 @@ def CreateConcerne(request):
 
 def UpdateConcerne(request,pk):
     if request.method == 'POST':
+        title = request.POST.get('title')
         importateur = request.POST.get('importateur')
         container = request.POST.get('container')
         marchandise = request.POST.get('marchandise')
@@ -307,6 +310,7 @@ def UpdateConcerne(request,pk):
         total_brut = frais_controle + frais_analyse_labo + tva
         form = Concerne(
             id = pk,
+            title = title,
             importateur = importateur,
             container = container,
             marchandise = marchandise,
@@ -539,7 +543,7 @@ def export_stat_mensuel_pdf(request):
     # -----------------------------
     # En-tête avec logo
     # -----------------------------
-    logo_path = 'static/images/logo_occ.png'  # chemin vers le logo OCC
+    logo_path = 'static/images/R.jpg'  # chemin vers le logo OCC
     try:
         logo = ImageReader(logo_path)
         c.drawImage(logo, 50, height - 80, width=60, height=60, preserveAspectRatio=True)
@@ -815,3 +819,6 @@ def export_stat_mensuel_pdf(request):
 
     c.save()
     return response
+
+def helpPatient(request):
+    return render(request,'admin/help.html')

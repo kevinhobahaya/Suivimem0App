@@ -24,4 +24,5 @@ urlpatterns = [
     path('statistiques/', views.tableau_stat_mensuel, name='statistiques'),
     path('export-statistiques-mensuelles/', views.export_stat_mensuel_excel, name='export_stat_mensuel_excel'),
     path('export-statistiques-mensuelles-pdf/', views.export_stat_mensuel_pdf, name='export_stat_mensuel_pdf'),
+    path('help_parametre',helpPatient,name='help_parametre'),
 ]

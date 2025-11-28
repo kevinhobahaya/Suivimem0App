@@ -1,0 +1,190 @@
+{% extends 'admin/structure.html' %}
+{% block content %}
+{% load static %}
+<!-- Prrofil Patient -->
+<main id="main" class="main">
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-4">
+        
+          <div class="card">
+            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+              <img src="{% static 'admin/assets/img/user.webp '%}" alt="Profile" height="130" width="130"  class="rounded-circle">
+              <h2>{{user.username}}</h2>
+              <h3>{{user.email}}</h3>
+              <div class="social-links mt-2">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+         
+
+        </div>
+
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Apercu</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+                
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  
+                  
+                  <h5 class="card-title">Profile Details</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Role</div>
+                    <div class="col-lg-9 col-md-8">{{user.username}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Concepteur</div>
+                    <div class="col-lg-9 col-md-8">Ir KAHAYA BANYWESIZE Kevin</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Email</div>
+                    <div class="col-lg-9 col-md-8">{{user.email}}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Contact</div>
+                    <div class="col-lg-9 col-md-8">+243 996861128</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">GitHub</div>
+                    <div class="col-lg-9 col-md-8">https://github.com/kevinhobahaya</div>
+                  </div>
+
+                  
+
+                  
+                
+                </div>
+               
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+                  {% for i in artistemaison %}
+                  <!-- Profile Edit Form -->
+                  <form class="row g-3 needs-validation" novalidate action="/modifiertalent/{{i.id}}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        
+                        <input type="text" class="form-control" id="validationDefault01" name="full_name" value="{{user.username}}" hidden required>
+                        <div class="invalid-feedback">Entre votre name!</div>
+                      </div>
+                      <div class="col-md-6">
+                        
+                        <input type="email" class="form-control" id="validationDefault02" name="email" value="{{user.email}}" hidden required>
+                        <div class="invalid-feedback">Entre votre email!</div>
+                      </div>
+                     
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label">Adresse</label>
+                      <div class="input-group has-validation">
+                          <input type="text" class="form-control" id="yourUsername" name="adresse" value="{{i.adresse}}" required>
+                        <div class="invalid-feedback">Entre votre adresse!</div>
+                        
+                      </div>
+                    </div>
+  
+                    <div class="col-12">
+                      <label for="yourEmail" class="form-label">Telephone</label>
+                  <input type="number"  class="form-control" id="yourEmail" name="tel" value="{{i.tel}}" required>
+                      <div class="invalid-feedback">Entre votre phone number!</div>
+                    </div>
+                    <div class="col-12">
+                      <label for="yourEmail" class="form-label">Affectation</label>
+                      <input type="text"  class="form-control" id="yourPassword" value="{{i.affectation}}" name="affectation" required>
+                    
+                    </div>
+      
+      
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Nom agence</label>
+                      <input type="text"  class="form-control" id="yourPassword" value="{{i.nomAgence}}" name="nomAgence" required>
+                      <div class="invalid-feedback">Entre votre date!</div>
+                    </div>
+                   
+                    <div class="col-12">
+                      <label for="yourPassword" class="form-label">Photo</label>
+                      <input type="file"  class="form-control" id="yourPassword" name="image" >
+                      
+                    </div>
+      
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Modifier</button>
+                    </div>
+                  </form>
+      
+                  {% endfor %}
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <!-- Change Password Form -->
+               
+                  <form class="row g-3 needs-validation" novalidate action="/modifieruser/{{user.id}}" method="post">
+                    {% csrf_token %}
+                    <div class="col-12">
+                      <label for="yourUsername" class="form-label" hidden >Nom d'utilisateur</label>
+                      <div class="input-group has-validation">
+                        <input type="text" name="username" hidden class="form-control" id="yourUsername" value="{{user.username}}" required>
+                        
+                      </div>
+                    </div>
+      
+                    <div class="col-12">
+                      <label for="yourEmail" class="form-label" hidden>Votre Email</label>
+                      <input type="email" name="email" hidden class="form-control" id="yourEmail" value="{{user.email}}" required>
+                    </div>
+      
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Nouveau Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="renewPassword" required>
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="renewPassword"  class="col-md-4 col-lg-3 col-form-label">Re-enter Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="confirm"  type="password" class="form-control" id="renewPassword" required>
+                      </div>
+                    </div>
+      
+                    <div class="col-12">
+                      <label for="inputState"class="form-label" hidden > compte pour</label>
+                      <select name="compte" hidden id="inputState" class="form-select" >
+                        <option value="1">Patient</option>
+                       
+                      </select>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                  </form>
+              
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  {% endblock %}

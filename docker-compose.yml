@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+web:
+build: .
+container_name: django_app
+ports:
+- "8000:8000"
+environment:
+DB_NAME: mydb
+DB_USER: root
+DB_PASSWORD: rootpass
+DB_HOST: localhost
+DB_PORT: 3306
+depends_on:
+- db
+
+
+db:
+image: mysql:8
+container_name: mysql_db
+restart: always
+environment:
+MYSQL_ROOT_PASSWORD: rootpass
+MYSQL_DATABASE: mydb
+ports:
+- "3306:3306"
+volumes:
+- mysql_data:/var/lib/mysql
+
+
+volumes:
+mysql_data:
