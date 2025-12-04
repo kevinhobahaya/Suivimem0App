@@ -1,0 +1,258 @@
+/* -------------------- ÉCRAN -------------------- */
+body {
+    font-family: "Times New Roman", serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.memo-container {
+    background: #fff;
+    border: 1px solid #000;
+    width: 210mm;                /* largeur exacte A4 */
+    min-height: 297mm;           /* hauteur exacte A4 */
+    padding: 18mm 20mm 12mm 20mm; /* marges internes ajustées : bas un peu réduit */
+    box-sizing: border-box;
+    margin: 10mm 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* ----- En-tête ----- */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.header-text h4 {
+    margin: 0;
+    font-weight: bold;
+}
+
+header p {
+    margin: 3px 0;
+}
+
+.date {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.ref {
+    margin-top: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.left, .right {
+    width: 45%;
+}
+
+.message {
+    margin-top: 20px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+    font-weight: bold;
+}
+
+footer {
+    margin-bottom: 20px; /* légèrement remonté */
+    font-size: 14px;
+    text-align: left;
+}
+
+/* -------------------- IMPRESSION -------------------- */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .memo-container {
+        width: 210mm;
+        height: 297mm;
+        padding: 18mm 20mm 12mm 20mm; /* même ajustement que pour l’écran */
+        margin: 0;
+        border: 1px solid #000;
+        box-shadow: none;
+        page-break-inside: avoid;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    header, .content, .message, .signatures, footer {
+        page-break-inside: avoid;
+    }
+}
+/* -------------------- ÉCRAN -------------------- */
+body {
+    font-family: "Times New Roman", serif;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.memo-container {
+    background: #fff;
+    border: 1px solid #000;
+    width: 210mm;                /* largeur exacte A4 */
+    min-height: 297mm;           /* hauteur exacte A4 */
+    padding: 18mm 20mm 12mm 20mm; /* marges internes ajustées : bas un peu réduit */
+    box-sizing: border-box;
+    margin: 10mm 0;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* ----- En-tête ----- */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    width: 80px;
+    height: auto;
+}
+
+.header-text {
+    flex: 1;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.header-text h4 {
+    margin: 0;
+    font-weight: bold;
+}
+
+header p {
+    margin: 3px 0;
+}
+
+.date {
+    text-align: right;
+    margin-top: 10px;
+}
+
+.ref {
+    margin-top: 20px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.left, .right {
+    width: 45%;
+}
+
+.message {
+    margin-top: 20px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.signatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 80px; /* légèrement remonté */
+    font-size: 12px;
+    text-align: left;
+}
+
+/* -------------------- IMPRESSION -------------------- */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .memo-container {
+        width: 210mm;
+        height: 297mm;
+        padding: 18mm 20mm 12mm 20mm; /* même ajustement que pour l’écran */
+        margin: 0;
+        border: 1px solid #000;
+        box-shadow: none;
+        page-break-inside: avoid;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    header, .content, .message, .signatures, footer {
+        page-break-inside: avoid;
+    }
+}
