@@ -29,7 +29,8 @@ SECRET_KEY ='django-insecure-90-x9rt&j*ryrvleegkq7hu2qxm2_!&zafmc-=l86k1pd%ako#'
 DEBUG = True
 from decouple import config
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost").split(",")
+
 
 
 pymysql.install_as_MySQLdb()
