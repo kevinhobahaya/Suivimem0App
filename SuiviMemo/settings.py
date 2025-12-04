@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ('SECRET_KEY')
+SECRET_KEY ='django-insecure-90-x9rt&j*ryrvleegkq7hu2qxm2_!&zafmc-=l86k1pd%ako#' 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['SuiviMemo.onrender.com']
 
 pymysql.install_as_MySQLdb()
 
@@ -89,19 +89,21 @@ WSGI_APPLICATION = 'SuiviMemo.wsgi.application'
 
 #     }
 # }
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'memoapp_db',
-#         }
-#     }
-
 DATABASES = {
-        'default': dj_database_url.parse(config('DATABASE_URL'))
-
-
-        
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'memoapp_db',
+        }
     }
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL'),  # type: postgres://user:pass@host:port/db
+#         conn_max_age=600,
+#         engine='django.db.backends.postgresql'
+#     )
+# }
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -137,11 +139,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
 MEDIA_URL ='/image/'
 MEDIA_ROOT =os.path.join(os.path.join(BASE_DIR),'static/image')
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+#  https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS =[
