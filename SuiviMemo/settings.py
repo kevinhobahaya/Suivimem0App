@@ -27,8 +27,10 @@ SECRET_KEY ='django-insecure-90-x9rt&j*ryrvleegkq7hu2qxm2_!&zafmc-=l86k1pd%ako#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+from decouple import config
 
-ALLOWED_HOSTS = ['SuiviMemo.onrender.com']
+ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+
 
 pymysql.install_as_MySQLdb()
 
