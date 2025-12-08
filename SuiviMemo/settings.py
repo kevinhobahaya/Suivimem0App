@@ -13,8 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import pymysql
-from decouple import config
-import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,16 +22,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY ='django-insecure-90-x9rt&j*ryrvleegkq7hu2qxm2_!&zafmc-=l86k1pd%ako#' 
+SECRET_KEY = 'django-insecure-90-x9rt&j*ryrvleegkq7hu2qxm2_!&zafmc-=l86k1pd%ako#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-from decouple import config
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="127.0.0.1,localhost").split(",")
-
-
-
+ALLOWED_HOSTS = ['*']
+# Important pour Railway
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 pymysql.install_as_MySQLdb()
 
 
@@ -81,17 +78,6 @@ WSGI_APPLICATION = 'SuiviMemo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'memoapp_db',
-#         'USER':'root',
-#         'PASSWORD':'',
-#         'HOST':'localhost',
-#         'PORT':'3306',
-
-#     }
-# }
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -99,14 +85,6 @@ DATABASES = {
         }
     }
 
-
-# DATABASES = {
-#     'default': dj_database_url.config(
-#         default=config('DATABASE_URL'),  # type: postgres://user:pass@host:port/db
-#         conn_max_age=600,
-#         engine='django.db.backends.postgresql'
-#     )
-# }
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -142,16 +120,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
 MEDIA_URL ='/image/'
 MEDIA_ROOT =os.path.join(os.path.join(BASE_DIR),'static/image')
 
 # Default primary key field type
-#  https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS =[
     BASE_DIR /'static'
 ]
-
-STATIC_ROOT = BASE_DIR / 'staticfiles'

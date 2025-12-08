@@ -1,1 +1,1 @@
-web: gunicorn SuiviMemo.wsgi --log-file -
+web: gunicorn SuiviMemo.wsgi 
